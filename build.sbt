@@ -9,6 +9,7 @@ val dependencies = Seq(
   "io.circe"                   %% "circe-yaml"               % "1.15.0",
   "io.circe"                   %% "circe-parser"             % "0.14.6",
   "io.circe"                   %% "circe-generic"            % "0.14.6",
+  "com.github.slugify"          % "slugify"                  % "3.0.6",
   "org.scalatest"              %% "scalatest"                % "3.2.18" % Test
 )
 
