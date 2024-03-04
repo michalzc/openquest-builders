@@ -6,11 +6,10 @@ val dependencies = Seq(
   "com.lihaoyi"                %% "os-lib"                   % "0.9.3",
   "ch.qos.logback"              % "logback-classic"          % "1.5.0",
   "com.typesafe.scala-logging" %% "scala-logging"            % "3.9.5",
+  "io.circe"                   %% "circe-yaml"               % "1.15.0",
+  "io.circe"                   %% "circe-parser"             % "0.14.6",
+  "io.circe"                   %% "circe-generic"            % "0.14.6",
   "org.scalatest"              %% "scalatest"                % "3.2.18" % Test
 )
 
-lazy val `openquest-builders` = project
-  .in(file("."))
-  .settings(
-    libraryDependencies ++= dependencies
-  )
+lazy val `openquest-builders` = project.in(file(".")).settings(libraryDependencies ++= dependencies)
