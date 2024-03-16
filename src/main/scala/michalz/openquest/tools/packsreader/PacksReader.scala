@@ -10,6 +10,12 @@ import os.Path
 
 import scala.jdk.CollectionConverters.*
 
+enum ItemType:
+  case SKILL
+  case WEAPON
+  case ARMOUR
+  case SPELL
+
 case class PacksReader(
   packsDir: os.Path,
   skillsCache: Map[String, Option[Json]] = Map.empty,
