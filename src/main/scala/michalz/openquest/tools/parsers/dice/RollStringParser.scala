@@ -18,8 +18,9 @@ object RollStringParser extends JavaTokenParsers with LazyLogging:
     Dice(none, size)
   }
   private def diceWithMultiplier: Parser[Dice] =
-    longValue ~ "d" ~ longValue ^^ { case multiplier ~ "d" ~ size =>
-      Dice(multiplier.some, size)
+    longValue ~ "d" ~ longValue ^^ { 
+      case multiplier ~ "d" ~ size => Dice(multiplier.some, size)
+      case _ => throw new Exception("Invalid match")
     }
 
   private def dice: Parser[Dice]              = singleDice | diceWithMultiplier
