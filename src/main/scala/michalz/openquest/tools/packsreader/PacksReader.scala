@@ -2,7 +2,6 @@ package michalz.openquest.tools.packsreader
 
 import cats.data.State
 import com.github.slugify.Slugify
-import com.typesafe.scalalogging.LazyLogging
 import io.circe.{Json, ParsingFailure}
 import io.circe.yaml.parser.parse
 import michalz.openquest.tools.packsreader.PacksReader.skillBySlugMatcher
@@ -24,7 +23,7 @@ case class PacksReader(
   weaponCache: Map[String, Option[Json]] = Map.empty,
   armourCache: Map[String, Option[Json]] = Map.empty,
   spellCache: Map[String, Option[Json]] = Map.empty
-) extends LazyLogging:
+):
 
   private val yamlFiles = os.walk(packsDir).filter(_.ext == "yaml")
 
@@ -37,7 +36,7 @@ case class PacksReader(
 
   errors
     .collect { case Left(error) => error }
-    .foreach(error => logger.warn("Error during reading file", error))
+    .foreach(error => println("Error during reading file: ${error}")) //FIXME
 
   private def findSkillAndCache(skillSlug: String): (PacksReader, Option[Json]) =
     skillsCache.get(skillSlug) match

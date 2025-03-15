@@ -1,8 +1,10 @@
 package michalz.openquest.tools.parsers.dice
 
+import cats.Id
+
 import scala.util.parsing.combinator.JavaTokenParsers
 import cats.syntax.option.*
-import com.typesafe.scalalogging.LazyLogging
+import org.slf4j.LoggerFactory
 
 case class RollStats(
   min: Long,
@@ -10,7 +12,9 @@ case class RollStats(
   avg: Long
 )
 
-object RollStringParser extends JavaTokenParsers with LazyLogging:
+object RollStringParser extends JavaTokenParsers:
+
+  val logger = LoggerFactory.getLogger(this.getClass)
 
   private def longValue: Parser[Long] = wholeNumber ^^ { _.toLong }
   private def number: Parser[Number]  = longValue ^^ { Number.apply }
