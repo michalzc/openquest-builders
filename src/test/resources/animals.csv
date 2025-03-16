@@ -1,0 +1,24 @@
+Giant Ant,4D6 (14),3D6+6 (17),2D6+6 (13),2D6 (7),2,1D6+3 (6),5,12,0,15m,Chitin (5AP),50% Bite 1D6
+Bear,3D6+15 (25),2D6+6 (13),3D6 (11),3D6+15 (25),5,3D6 (11),5,19,+2D6,20m,Tough hide (3AP),"60% Bite 1D8, Claw 1D6"
+"Big Cat (Lion, Tiger, etc)",3D6+12 (24),3D6 (11),3D6+6 (17),2D6+12 (19),5,3D6 (11),5,15,+1D6,20m,Hide (2AP),"60% Bite 1D8, Claw 1D6"
+Giant Beetle,2D6+12 (19),3D6+6 (17),2D6+6 (13),3D6+6 (17),2,1D6+6 (9),2,17,+1D6,15m,Chitin (5AP),50% Bite 1D8
+Cattle,4D6+6 (20),2D6+9 (15),2D6 (7),2D6+9 (15),4,2D6 (7),4,15,+1D6,15m,Hide (2AP),"40% Charge 1D8, Trample 1D8"
+Giant Crab,3D6+24 (35),3D6+6 (17),2D6 (7),3D6+24 (35),2,3D6 (11),2,26,+3D6,"15m on land, 2 in water",Thick Shell (6AP),50% Claw 1D10
+Giant Crocodile,5D6+12 (30),3D6+12(19),3D6 (11),4D6 (14),3,3D6 (11),3,15,+1D6,"7m on land, 2 in water",Thick Hide (5AP),50% Bite 1D8
+Flightless Bird,4D6+18 (32),2D6+6 (13),3D6+6 (17),4D6+12 (26),3,3D6 (11),3,18,+2D6,20m,Thick feathers (3AP),"45% Peck 1D8, Kick 1D6"
+Dog,2D6+6 (13),3D6 (11),2D6+6 (13),1D6 (3),5,1D6+6 (9),5,7,0,20m,None,40% Bite 1D6
+Elephant,6D6+24 (45),3D6+15 (24),3D6 (11),6D6+30 (48),6,2D6+6 (13),5,36,+5D6,20m,Thick hide (3 AP),"45% Trample 1D12, Tusk 1D10, Trunk Grapple"
+Hawk,1D3 (2),2D3 (4),3D6+18 (27),1d2 (2),4,2D6 (7),4,3,-1D6,"15m, 30m Flying",None,"50% Claw 1D6, Bite 1D4"
+Giant Hawk,6D6+21 (39),5D6+15 (33),3D6+9 (18),6D6+21 (39),4,3D6 (11),4,36,+4D6,"20m, 30m Flying",thick feathers (3 AP),"80% Claw 1D8, Bite 1D6"
+Horse,2D6+18 (25),3D6+6 (17),2D6+3 (10),2D6+18 (25),4,3D6 (11),5,21,+2D6,30m,Hide (2AP),40% Kick 1D6
+Giant Lizard,2D6+12 (19),3D6 (11),1D6+12 (15),2D6+12 (19),3,3D6 (11),3,15,+1D6,15m,Hide (2AP),"25% Bite 1D6, Kick 1D8"
+Giant Octopus,12D6 (42),4D6+6 (20),3D6+12 (23),12D6 (42),4,3D6 (11),4,31,+4D6,"7m land, 30m swimming",Tough skin (4 AP),"50% Bite 1D8, Arm 1D4"
+Pteranodon,4D6+6 (20),3D6+3 (14),2D6 +12 (17),4D6+12 (26),3,3D6 (11),3,20,+2D6,"15m on land, 30m flying",Tough hide (3 AP),"50% Bite 1D8, Claw 1D6"
+Giant Python,3D6+24 (35),3D6 (11),2D6+6 (13),3D6 (11),3,3D6 (11),3,11,+2D6,15m,Scales (3 AP),"50% Bite 1D4, Constrict 1D8"
+Rhinoceros,2D6+21 (26),3D6 (11),2D6 (7),2D6+21 (26),3,3D6 (11),3,19,+2D6,20m,Thick hide (5 AP),"50% Bite 1D6, Gore 1D8, Trample 1D12"
+Giant Spider,2D6+12 (19),3D6+6 (17),2D6+9 (16),4D6+12 (26),8,3D6 (11),2,22,+1D6,"15m on land, 20m in web",Chitin (4 AP),"50% Bite 1D6+ Venom see below, Webbing (Entangles Athletics vs rolled attack to escape or spiders POW x2 as Hit Points to destroy)"
+Triceratops,6D6+30 (51),3D10+12 (28),2D6+3 (10),6D6+30 (48),3,3D6 (11),3,38,+5D6,30m,Scales (10 AP),"50% Tail lash 1D12, Gore 1D10"
+Tyrannosaurus,4D6+40 (52),5D6+30 (47),2D6+3 (10),4D6+30 (42),3,2D6+6 (13),3,45,+5D6,30m,Thick Hide (10 AP),"60% Bite 1D10, Stomp 1D10"
+Velociraptor,4D6+12 (26),3D6+3 (14),4D6 (14),3D6+6 (17),4,2D6+6 (13),3,16,+1D6,30m,Scales (5 AP),"50% Bite 1D8, Claw 1D6, Fore claw 1D4"
+Viper,2D6+6 (13),2D6 (6),3D6+18 (27),2D6 (7),3,2D6+6 (13),3,7,0,30m,Scales (1 AP),60% Bite + Venom (see below)
+Wolf,3D6 (11),3D6+3 (14),3D6+3(13),2D6+3 (10),5,3D6 (11),5,12,0,20m,None,"50% Bite 1D8, Claw 1D6"

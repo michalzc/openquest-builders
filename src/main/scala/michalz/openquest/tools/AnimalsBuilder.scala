@@ -33,6 +33,8 @@ def validateInput(args: List[String]): IO[Either[NonEmptyList[OpenQuestError], A
       Validated.invalidNel(ApplicationError(s"Two arguments are required, but got ${args.mkString(", ")}")).toEither
     )
 
+def readAnimals(sourceFile: Path): IO[Either[NonEmptyList[OpenQuestError], Unit]] = IO.pure(Either.right(()))
+
 def generateAnimals[F[_]: Sync](
   sourceFile: Path,
   outputDirectory: Path
