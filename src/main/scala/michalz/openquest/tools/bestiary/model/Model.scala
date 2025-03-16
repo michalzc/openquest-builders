@@ -1,10 +1,15 @@
 package michalz.openquest.tools.bestiary.model
 
-case class Characteristic(base: Int, roll: String, mod: Int)
+import michalz.openquest.tools.parsers.dice.{RollStats, RollToken}
+import cats.syntax.option.*
+
+case class Characteristic(base: Int, roll: String, mod: Int, parsed: Option[RollToken] = none)
 
 object Characteristic:
   def apply(num: Int): Characteristic                = Characteristic(num, num.toString, 0)
   def apply(base: Int, roll: String): Characteristic = Characteristic(base, roll, 0)
+  def apply(rollToken: RollToken): Characteristic =
+    Characteristic(rollToken.avg.toInt, rollToken.render, 0, rollToken.some)
 
 case class ModMaxValueAttr(mod: Int, max: Int, value: Int)
 

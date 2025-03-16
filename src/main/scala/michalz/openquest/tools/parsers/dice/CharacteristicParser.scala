@@ -6,6 +6,8 @@ import michalz.openquest.tools.parsers.dice.RollStringParser
 import michalz.openquest.tools.{OpenQuestError, ParsingError}
 import org.slf4j.{Logger, LoggerFactory}
 
+import cats.syntax.option.*
+
 import scala.util.parsing.combinator.JavaTokenParsers
 
 trait CharacteristicParser extends RollStringParser:
@@ -17,13 +19,15 @@ trait CharacteristicParser extends RollStringParser:
   def numberInParentheses: Parser[Int]                           = "(" ~> wholeNumber <~ ")" ^^ { _.toInt }
   def numericInParenthesesCharacteristic: Parser[Characteristic] = numberInParentheses ^^ { Characteristic(_) }
   def rollWithDefaultParser: Parser[Characteristic] = diceParser ~ numberInParentheses ^^ { case roll ~ value =>
-    Characteristic(value, roll.render, 0)
+    Characteristic(value, roll.render, 0, roll.some)
   }
+  def onlyRollCharacteristic: Parser[Characteristic] = diceParser ^^ { Characteristic(_) }
 
-  def parseCharacteristic: Parser[Characteristic] = rollWithDefaultParser | numericInParenthesesCharacteristic | numericCharacteristic
+  def characteristicParser: Parser[Characteristic] =
+    rollWithDefaultParser | onlyRollCharacteristic | numericInParenthesesCharacteristic | numericCharacteristic
 
   def parseCharacteristic(input: String): Either[OpenQuestError, Characteristic] =
-    parseAll(parseCharacteristic, input) match
+    parseAll(characteristicParser, input) match
       case Success(result, next) if next.atEnd =>
         result.asRight
 
@@ -36,7 +40,5 @@ trait CharacteristicParser extends RollStringParser:
 
       case Error(error, remains) =>
         ParsingError(error, remains.toString).asLeft
-
-
 
 object CharacteristicParser extends CharacteristicParser
