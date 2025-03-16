@@ -32,7 +32,7 @@ ${rollTable.message}
     "1+ 2*3"          ! 7     ! 7     ! 7     |
     "(1 + 3)*4/5"     ! 3     ! 3     ! 3     |
       { (roll, expMin, expMax, expAvg) =>
-      val result = RollStringParser.parseString(roll)
+      val result = RollStringParser.parseRollString(roll)
 
       (result.map(_.min) must beSome(expMin)) and
         (result.map(_.max) must beSome(expMax)) and
@@ -47,7 +47,7 @@ ${rollTable.message}
     "2d6 + 8"     ! 10    ! 20    ! 15    ! "2d6+8"     |
     "d6 * (3+2d6)"! 5     ! 90    ! 35    ! "d6*(3+2d6)"|
     { (roll, expMin, expMax, expAvg, render) =>
-      val result = RollStringParser.parseString(roll)
+      val result = RollStringParser.parseRollString(roll)
 
       (result.map(_.min) must beSome(expMin)) and
         (result.map(_.max) must beSome(expMax)) and

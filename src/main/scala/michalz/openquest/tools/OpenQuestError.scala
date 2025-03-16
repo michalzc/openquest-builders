@@ -9,6 +9,7 @@ class FileError(message: String) extends Exception(message) with OpenQuestError
 
 case class ApplicationError(message: String)               extends IllegalArgumentException(message) with OpenQuestError
 case class ErrorWrapper(message: String, cause: Throwable) extends RuntimeException(message, cause) with OpenQuestError
+case class ParsingError(message: String, remain: String) extends RuntimeException(message) with OpenQuestError
 
 object FileError:
   def apply(message: String): FileError = new FileError(message)

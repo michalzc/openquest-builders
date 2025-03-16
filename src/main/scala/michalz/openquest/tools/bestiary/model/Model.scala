@@ -2,6 +2,10 @@ package michalz.openquest.tools.bestiary.model
 
 case class Characteristic(base: Int, roll: String, mod: Int)
 
+object Characteristic:
+  def apply(num: Int): Characteristic                = Characteristic(num, num.toString, 0)
+  def apply(base: Int, roll: String): Characteristic = Characteristic(base, roll, 0)
+
 case class ModMaxValueAttr(mod: Int, max: Int, value: Int)
 
 case class StringModAttr(mod: String)

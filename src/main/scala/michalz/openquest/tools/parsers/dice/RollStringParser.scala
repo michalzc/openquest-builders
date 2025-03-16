@@ -13,19 +13,19 @@ case class RollStats(
   roll: String
 )
 
-object RollStringParser extends JavaTokenParsers:
+trait RollStringParser extends JavaTokenParsers:
 
   val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
-  private def longValue: Parser[Long]          = wholeNumber ^^ { _.toLong }
-  private def number: Parser[Number]           = longValue ^^ { Number.apply }
-  private def singleDice: Parser[Dice]         = "d" ~ longValue ^^ { case "d" ~ size =>
+  private def d: Parser[String]       = "d" | "D"
+  private def longValue: Parser[Long] = wholeNumber ^^ { _.toLong }
+  private def number: Parser[Number]  = longValue ^^ { Number.apply }
+  private def singleDice: Parser[Dice] = d ~ longValue ^^ { case d ~ size =>
     Dice(none, size)
   }
   private def diceWithMultiplier: Parser[Dice] =
-    longValue ~ "d" ~ longValue ^^ {
-      case multiplier ~ "d" ~ size => Dice(multiplier.some, size)
-      case _                       => throw new Exception("Invalid match")
+    longValue ~ d ~ longValue ^^ {
+      case multiplier ~ d ~ size => Dice(multiplier.some, size)
     }
 
   private def dice: Parser[Dice]              = singleDice | diceWithMultiplier
@@ -33,7 +33,7 @@ object RollStringParser extends JavaTokenParsers:
 
   private def diceFactor: Parser[RollToken] =
     diceOrNumber | "(" ~> diceExpression <~ ")"
-  private def diceTerm: Parser[RollToken]   =
+  private def diceTerm: Parser[RollToken] =
     diceFactor ~ rep("*" ~ diceFactor | "/" ~ diceFactor) ^^ { case die ~ list =>
       list.foldLeft(die) {
         case (left, "/" ~ right) => DivExpression(left, right)
@@ -51,12 +51,12 @@ object RollStringParser extends JavaTokenParsers:
       }
     }
 
-  def diceParser: Parser[RollToken]                                    =
+  def diceParser: Parser[RollToken] =
     diceExpression | diceTerm | diceFactor | diceOrNumber
   def parseStringRollToken(rollString: String): ParseResult[RollToken] =
     parseAll(diceParser, rollString)
 
-  def parseString(rollString: String): Option[RollStats] =
+  def parseRollString(rollString: String): Option[RollStats] =
     parseStringRollToken(rollString) match {
       case Success(result, next) if next.atEnd =>
         RollStats(min = result.min, max = result.max, avg = result.avg, roll = result.render).some
@@ -75,3 +75,5 @@ object RollStringParser extends JavaTokenParsers:
         logger.error(s"Parsing Error: ${error}, remains: ${remains}")
         none
     }
+
+object RollStringParser extends RollStringParser
