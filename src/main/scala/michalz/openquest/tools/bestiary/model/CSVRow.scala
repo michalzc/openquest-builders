@@ -10,20 +10,16 @@ extension (self: String)
     self match
       case s if s.isBlank =>
         CSVReadingError(fieldName = field, errorMessage = "is empty").invalidNel
-      case s =>
+      case s              =>
         s.validNel
 
   def blankOption: Option[String] =
-    if self.isBlank then
-      none
-    else
-      self.some
+    if self.isBlank then none
+    else self.some
 
   def emptyOption: Option[String] =
-    if self.isEmpty then
-      none
-    else
-      self.some
+    if self.isEmpty then none
+    else self.some
 
 case class CSVRow(
   name: String,
@@ -49,7 +45,7 @@ object CSVRow:
       case (name, image, folder, strRoll, conRoll, dexRoll, sizRoll, intRoll, powRoll, chaRoll, move, items) =>
         val validatedMove: ValidatedNel[CSVReadingError, Option[Int]] = move match
           case sm if sm.isBlank => none.validNel
-          case sm => sm.toIntOption.map(_.some).toValidNel(CSVReadingError("move", "invalid value"))
+          case sm               => sm.toIntOption.map(_.some).toValidNel(CSVReadingError("move", "invalid value"))
         (
           name.nonEmpty("name"),
           name.nonEmpty("strRoll"),
@@ -59,7 +55,7 @@ object CSVRow:
           name.nonEmpty("intRoll"),
           name.nonEmpty("powRoll"),
           name.nonEmpty("chaRoll"),
-          validatedMove,
+          validatedMove
         ).mapN { case (name, strRoll, conRoll, dexRoll, sizRoll, intRoll, powRoll, chaRoll, move) =>
           CSVRow(
             name,

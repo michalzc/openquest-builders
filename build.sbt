@@ -1,7 +1,8 @@
 ThisBuild / scalaVersion := "3.3.5"
 ThisBuild / scalacOptions ++= Seq(
   "-feature",
-  "-Werror"
+  "-Werror",
+  "-deprecation"
 )
 
 val dependencies = Seq(
@@ -22,7 +23,6 @@ val dependencies = Seq(
   "io.circe"                %% "circe-yaml"                    % "1.15.0",
   "com.github.slugify"       % "slugify"                       % "3.0.7",
   "com.github.tototoshi"    %% "scala-csv"                     % "2.0.0",
-  "org.typelevel"           %% "cats-effect-testing-specs2"    % "1.6.0"  % Test,
   "org.typelevel"           %% "cats-effect-testing-scalatest" % "1.6.0"  % Test,
   "org.scalatest"           %% "scalatest"                     % "3.2.19" % Test,
   "org.specs2"              %% "specs2-core"                   % "5.5.8"  % Test

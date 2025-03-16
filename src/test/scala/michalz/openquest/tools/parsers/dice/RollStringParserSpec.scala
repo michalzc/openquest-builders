@@ -40,16 +40,19 @@ ${rollTable.message}
     }
 
   val rollTable =
-    "roll string" | "min" | "max" | "avg" |>
-    "d6"          ! 1     ! 6     ! 4     |
-    "2d6"         ! 2     ! 12    ! 7     |
-    "3d6"         ! 3     ! 18    ! 11    |
-    { (roll, expMin, expMax, expAvg) =>
+    "roll string" | "min" | "max" | "avg" | "render"    |>
+    "d6"          ! 1     ! 6     ! 4     ! "d6"        |
+    "2d6"         ! 2     ! 12    ! 7     ! "2d6"       |
+    "3d6"         ! 3     ! 18    ! 11    ! "3d6"       |
+    "2d6 + 8"     ! 10    ! 20    ! 15    ! "2d6+8"     |
+    "d6 * (3+2d6)"! 5     ! 90    ! 35    ! "d6*(3+2d6)"|
+    { (roll, expMin, expMax, expAvg, render) =>
       val result = RollStringParser.parseString(roll)
 
       (result.map(_.min) must beSome(expMin)) and
         (result.map(_.max) must beSome(expMax)) and
-        (result.map(_.avg) must beSome(expAvg))
+        (result.map(_.avg) must beSome(expAvg)) and
+        (result.map(_.roll) must beSome(render))
     }
 
   //format:on

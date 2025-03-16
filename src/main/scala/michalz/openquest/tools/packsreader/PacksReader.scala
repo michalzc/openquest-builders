@@ -36,7 +36,7 @@ case class PacksReader(
 
   errors
     .collect { case Left(error) => error }
-    .foreach(error => println("Error during reading file: ${error}")) //FIXME
+    .foreach(error => println("Error during reading file: ${error}")) // FIXME
 
   private def findSkillAndCache(skillSlug: String): (PacksReader, Option[Json]) =
     skillsCache.get(skillSlug) match

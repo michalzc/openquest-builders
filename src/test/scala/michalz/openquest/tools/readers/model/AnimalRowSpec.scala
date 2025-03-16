@@ -18,7 +18,7 @@ class AnimalRowSpec extends AsyncFlatSpec with AsyncIOSpec with Matchers:
 
   "Stream" should "read csv" in {
     val r = fixture.take(1).compile.toList
-    r.map { result => 
+    r.map { result =>
       result.headOption should not be empty
     }
   }
@@ -27,6 +27,6 @@ class AnimalRowSpec extends AsyncFlatSpec with AsyncIOSpec with Matchers:
     val stream  = fixture.through(decodeWithoutHeaders[AnimalRow]())
     val animals = stream.compile.toList
     animals.map { animals =>
-      animals should have size(24)
+      animals should have size (24)
     }
   }
