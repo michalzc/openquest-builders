@@ -12,10 +12,16 @@ object Characteristic:
     Characteristic(rollToken.avg.toInt, rollToken.render, 0, rollToken.some)
 
 case class ModMaxValueAttr(mod: Int, max: Int, value: Int)
+object ModMaxValueAttr:
+  def apply(value: Int): ModMaxValueAttr = ModMaxValueAttr(mod = 0, max = value, value = value)
+  def zero: ModMaxValueAttr = ModMaxValueAttr(0, 0, 0)
 
 case class StringModAttr(mod: String)
 
 case class ModBaseAttr(mod: Int, base: Int)
+object ModBaseAttr:
+  def apply(value: Int): ModBaseAttr = ModBaseAttr(0, value)
+  def zero: ModBaseAttr = ModBaseAttr(0, 0)
 
 case class Initiative(reference: Option[String], mod: Option[Int])
 

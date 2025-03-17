@@ -1,7 +1,10 @@
 package michalz.openquest.tools.readers.model
 
+import cats.data.NonEmptyList
 import fs2.data.csv.{CsvRowDecoder, RowDecoder}
 import fs2.data.csv.generic.semiauto.*
+import michalz.openquest.tools.{OpenQuestResult, OpenQuestResultNel}
+import michalz.openquest.tools.bestiary.model.Animal
 
 import scala.compiletime.{constValue, erasedValue, summonInline}
 

@@ -1,9 +1,15 @@
 package michalz.openquest.tools
 
+import cats.data.NonEmptyList
+
 import java.nio.file.Path
 import scala.StringContext.InvalidEscapeException
 
 trait OpenQuestError extends Throwable
+
+type OpenQuestErrorNel = NonEmptyList[OpenQuestError]
+type OpenQuestResult[A] = Either[OpenQuestError, A]
+type OpenQuestResultNel[A] = Either[NonEmptyList[OpenQuestError], A]
 
 class FileError(message: String) extends Exception(message) with OpenQuestError
 
