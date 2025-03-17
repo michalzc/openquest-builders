@@ -1,3 +1,8 @@
 .bsp/
 .idea/
 target/
+.metals/
+.vscode/
+.bloop/
+.scala-build/
+metals.sbt
