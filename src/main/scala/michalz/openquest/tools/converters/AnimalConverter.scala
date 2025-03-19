@@ -12,7 +12,7 @@ import michalz.openquest.tools.*
 
 import scala.language.implicitConversions
 
-object AnimalConverters {
+object AnimalConverter {
 
   given resultConversion[A]: Conversion[CharacteristicParser.ParseResult[A], OpenQuestResultNel[A]] with
     def apply(result: CharacteristicParser.ParseResult[A]): OpenQuestResultNel[A] = result match
@@ -21,7 +21,7 @@ object AnimalConverters {
       case CharacteristicParser.Error(error, remain)   => NonEmptyList.one(ParsingError(error, remain.toString)).asLeft
 
   extension (row: AnimalRow)
-    def toAnimal: OpenQuestResultNel[Animal] = makeAnimal(row)
+    def toAnimal(id: String): OpenQuestResultNel[Animal] = makeAnimal(id, row)
 
   extension (input: String)
     def toCharacteristic: OpenQuestResultNel[Characteristic] = parseCharacteristic(input)
@@ -33,7 +33,7 @@ object AnimalConverters {
   def parseMovement(input: String): OpenQuestResultNel[ModBaseAttr] =
     CharacteristicParser.parse(CharacteristicParser.numberParser, input).map(ModBaseAttr.apply)
 
-  def makeAnimal(row: AnimalRow): OpenQuestResultNel[Animal] =
+  def makeAnimal(id: String, row: AnimalRow): OpenQuestResultNel[Animal] =
     val characteristics = (
       row.str.toCharacteristic,
       row.con.toCharacteristic,
@@ -53,7 +53,7 @@ object AnimalConverters {
       none[Initiative].asRight[OpenQuestErrorNel]
     ).parMapN(Attributes.apply)
 
-    (characteristics, attributes).parMapN((c, a) => Animal(row.name, c, a))
+    (characteristics, attributes).parMapN((c, a) => Animal(id, row.name, c, a, List.empty))
 
   def parseCharacteristic(input: String): OpenQuestResultNel[Characteristic] =
     CharacteristicParser.parseCharacteristic(input).leftMap(NonEmptyList.one)

@@ -1,21 +1,25 @@
 package michalz.openquest.tools
 
 import cats.data.NonEmptyList
+import cats.syntax.either.*
 
 import java.nio.file.Path
 import scala.StringContext.InvalidEscapeException
 
 trait OpenQuestError extends Throwable
 
-type OpenQuestErrorNel = NonEmptyList[OpenQuestError]
-type OpenQuestResult[A] = Either[OpenQuestError, A]
+type OpenQuestErrorNel     = NonEmptyList[OpenQuestError]
+type OpenQuestResult[A]    = Either[OpenQuestError, A]
 type OpenQuestResultNel[A] = Either[NonEmptyList[OpenQuestError], A]
 
 class FileError(message: String) extends Exception(message) with OpenQuestError
 
+extension [A](result: OpenQuestResult[A])
+  def toNel: OpenQuestResultNel[A] = result.leftMap(NonEmptyList.one(_))
+
 case class ApplicationError(message: String)               extends IllegalArgumentException(message) with OpenQuestError
 case class ErrorWrapper(message: String, cause: Throwable) extends RuntimeException(message, cause) with OpenQuestError
-case class ParsingError(message: String, remain: String) extends RuntimeException(message) with OpenQuestError
+case class ParsingError(message: String, remain: String)   extends RuntimeException(message) with OpenQuestError
 
 object FileError:
   def apply(message: String): FileError = new FileError(message)

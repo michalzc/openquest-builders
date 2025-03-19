@@ -1,0 +1,14 @@
+name: Claw
+type: weapon
+img: systems/oq/assets/icons/grasping-claws.svg
+system:
+  correspondingSkill:
+    skillReference: natural-combat
+  hands: one
+  state: natural
+  type: melee
+  damage:
+    damageFormula: 1d1
+    includeDamageMod: true
+ownership:
+  default: 0

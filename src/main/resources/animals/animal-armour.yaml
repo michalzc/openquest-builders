@@ -1,0 +1,8 @@
+name: Animal Armour
+type: armour
+img: systems/oq/assets/icons/scales.svg
+system:
+  ap: 1
+  state: natural
+ownership:
+  default: 0

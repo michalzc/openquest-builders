@@ -1,0 +1,10 @@
+name: Natural Combat
+type: skill
+img: systems/oq/assets/icons/animal-skull.svg
+system:
+  description: <p>Creatures and animals natural combat ability.</p>
+  formula: '@str+@dex'
+  type: combat
+  advancement: 9
+ownership:
+  default: 0
