@@ -19,7 +19,7 @@ trait AnimalArmourParser extends JavaTokenParsers:
   val word: Parser[String]           = """[a-zA-Z]+""".r
   val spaces: Parser[String]         = """\s+""".r
   val armourName: Parser[String]     = repsep(word, spaces) <~ opt(spaces) ^^ { words => words.mkString(" ") }
-  val ap: Parser[String]             = opt(spaces) ~> "AP" 
+  val ap: Parser[String]             = opt(spaces) ~> "AP"
   val num: Parser[Int]               = "(" ~> wholeNumber <~ (opt(ap) ~ ")") ^^ { _.toInt }
   val namedAnimalArmourParser: Parser[AnimalArmour] = armourName ~ num ^^ { case name ~ value =>
     AnimalArmour(name, value)

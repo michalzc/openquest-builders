@@ -2,7 +2,8 @@ ThisBuild / scalaVersion := "3.3.5"
 ThisBuild / scalacOptions ++= Seq(
   "-feature",
   "-Werror",
-  "-deprecation"
+  "-deprecation",
+  "-Wunused:all"
 )
 
 val dependencies =

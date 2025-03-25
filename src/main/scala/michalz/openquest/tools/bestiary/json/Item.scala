@@ -2,7 +2,6 @@ package michalz.openquest.tools.bestiary.json
 
 import io.circe.{Decoder, Encoder, HCursor, Json}
 import io.circe.Decoder.Result
-import io.circe.generic.semiauto.*
 import io.circe.syntax.*
 
 import michalz.openquest.tools.bestiary.model.Weapon

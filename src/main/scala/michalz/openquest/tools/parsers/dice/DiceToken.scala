@@ -50,21 +50,21 @@ case class PlusExpression(
   left: RollToken,
   right: RollToken
 ) extends InParentheses:
-  def symbol: String = "+"
+  def symbol: String                      = "+"
   def op[A: Numeric](lval: A, rval: A): A = Numeric[A].plus(lval, rval)
 
 case class MultiplyExpression(
   left: RollToken,
   right: RollToken
 ) extends UseParentheses:
-  def symbol: String = "*"
+  def symbol: String                      = "*"
   def op[A: Numeric](lval: A, rval: A): A = Numeric[A].times(lval, rval)
 
 case class MinusExpression(
   left: RollToken,
   right: RollToken
 ) extends InParentheses:
-  def symbol: String = "-"
+  def symbol: String                      = "-"
   def op[A: Numeric](lval: A, rval: A): A = Numeric[A].minus(lval, rval)
 
 case class DivExpression(
@@ -75,7 +75,7 @@ case class DivExpression(
   override def op[A: Numeric](lval: A, rval: A): A = {
     val num = implicitly[Numeric[A]]
     num match
-      case i: Integral[A] => i.quot(lval, rval)
+      case i: Integral[A]   => i.quot(lval, rval)
       case f: Fractional[A] => f.div(lval, rval)
   }
 

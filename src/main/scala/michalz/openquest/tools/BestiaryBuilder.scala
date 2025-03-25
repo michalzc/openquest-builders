@@ -1,8 +1,9 @@
 package michalz.openquest.tools
 
-import michalz.openquest.tools.packsreader.PacksReader
-
+import scala.annotation.unused
 import scala.util.CommandLineParser
+
+import michalz.openquest.tools.packsreader.PacksReader
 
 given CommandLineParser.FromString[os.Path] with
   def fromString(value: String): os.Path = os.Path(value)
@@ -10,4 +11,4 @@ given CommandLineParser.FromString[os.Path] with
 @main
 def bestiaryBuilder(sourceFile: os.Path, packsDir: os.Path, outputDir: os.Path): Unit =
   println(s"Bestiary builder, looking defs in $sourceFile, item data in ${packsDir} and output to $outputDir directory")
-  val packs = new PacksReader(packsDir)
+  @unused val packs = new PacksReader(packsDir)

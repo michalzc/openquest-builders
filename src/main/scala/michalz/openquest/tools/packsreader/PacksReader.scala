@@ -1,13 +1,16 @@
 package michalz.openquest.tools.packsreader
 
 import cats.data.State
-import com.github.slugify.Slugify
+
 import io.circe.{Json, ParsingFailure}
 import io.circe.yaml.parser.parse
-import michalz.openquest.tools.packsreader.PacksReader.skillBySlugMatcher
 
-import java.nio.file.Path
+import scala.annotation.unused
 import scala.jdk.CollectionConverters.*
+
+import com.github.slugify.Slugify
+
+import michalz.openquest.tools.packsreader.PacksReader.skillBySlugMatcher
 
 type ParsingResult = Either[ParsingFailure, Json]
 
@@ -41,11 +44,12 @@ case class PacksReader(
   private def findSkillAndCache(skillSlug: String): (PacksReader, Option[Json]) =
     skillsCache.get(skillSlug) match
       case Some(jsonOpt) => (this, jsonOpt)
-      case None          =>
+      case None =>
         val matcher: Json => Boolean = skillBySlugMatcher(skillSlug)
         val result                   = yamls.find(matcher)
         (this.copy(skillsCache = this.skillsCache + (skillSlug -> result)), result)
 
+  @unused
   private def findElement(matcher: Json => Boolean): Option[Json] =
     yamls.find(matcher)
 
@@ -66,8 +70,8 @@ object PacksReader {
       val typeJson: Option[String] = cursor.downField("type").as[String].toOption
       val nameJson: Option[String] = cursor.downField("name").as[String].toOption
       (for {
-        `type`   <- typeJson
-        name     <- nameJson
+        `type` <- typeJson
+        name   <- nameJson
         skillSlug = slugify.slugify(name)
       } yield `type` == "skill" && skillSlug == skillSlug).getOrElse(false)
 }

@@ -2,15 +2,17 @@ package michalz.openquest.tools.converters
 
 import cats.data.NonEmptyList
 import cats.instances.either.*
+
 import cats.syntax.either.*
 import cats.syntax.option.*
 import cats.syntax.parallel.*
+
+import scala.language.implicitConversions
+
 import michalz.openquest.tools.*
 import michalz.openquest.tools.bestiary.model.*
 import michalz.openquest.tools.parsers.dice.CharacteristicParser
 import michalz.openquest.tools.readers.model.AnimalRow
-
-import scala.language.implicitConversions
 
 class AnimalConverter
 

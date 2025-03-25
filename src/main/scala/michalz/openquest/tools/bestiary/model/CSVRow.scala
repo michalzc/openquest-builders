@@ -1,16 +1,17 @@
 package michalz.openquest.tools.bestiary.model
 
 import cats.data.ValidatedNel
-import cats.syntax.validated.*
-import cats.syntax.option.*
+
 import cats.syntax.apply.*
+import cats.syntax.option.*
+import cats.syntax.validated.*
 
 extension (self: String)
   def nonEmpty(field: => String): ValidatedNel[CSVReadingError, String] =
     self match
       case s if s.isBlank =>
         CSVReadingError(fieldName = field, errorMessage = "is empty").invalidNel
-      case s              =>
+      case s =>
         s.validNel
 
   def blankOption: Option[String] =

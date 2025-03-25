@@ -1,6 +1,5 @@
 package michalz.openquest.tools.readers.model
 
-import cats.Show
 import cats.data.NonEmptyList
 import cats.effect.IO
 import cats.effect.std.Random
@@ -16,7 +15,6 @@ import org.specs2.Specification
 import org.specs2.matcher.Matchers
 
 import michalz.openquest.tools.Implicits.*
-import michalz.openquest.tools.Implicits.showError
 import michalz.openquest.tools.OpenQuestError
 import michalz.openquest.tools.bestiary.model.Animal
 import michalz.openquest.tools.bestiary.model.Animal.showAnimal
