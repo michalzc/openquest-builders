@@ -1,13 +1,12 @@
 package michalz.openquest.tools.parsers.dice
 
-import michalz.openquest.tools.bestiary.model.Characteristic
+import scala.language.implicitConversions
+
 import org.specs2.Specification
 import org.specs2.execute.DecoratedResult
 import org.specs2.matcher.{DataTable, Matchers}
 import org.specs2.specification.Tables
 import org.specs2.specification.core.SpecStructure
-
-import scala.language.implicitConversions
 
 class CharacteristicParserSpec extends Specification with Matchers with Tables {
 

@@ -1,6 +1,8 @@
 package michalz.openquest.tools
 
+import cats.Show
 import cats.data.NonEmptyList
+
 import cats.syntax.either.*
 
 import java.nio.file.Path
@@ -15,7 +17,7 @@ type OpenQuestResultNel[A] = Either[NonEmptyList[OpenQuestError], A]
 class FileError(message: String) extends Exception(message) with OpenQuestError
 
 extension [A](result: OpenQuestResult[A])
-  def toNel: OpenQuestResultNel[A] = result.leftMap(NonEmptyList.one(_))
+  def toNel: OpenQuestResultNel[A] = result.leftMap(NonEmptyList.one)
 
 case class ApplicationError(message: String)               extends IllegalArgumentException(message) with OpenQuestError
 case class ErrorWrapper(message: String, cause: Throwable) extends RuntimeException(message, cause) with OpenQuestError
@@ -26,3 +28,7 @@ object FileError:
   def notExists(path: Path): FileError  = new FileError(s"${path} doesn't exists")
   def notAFile(path: Path): FileError   = new FileError(s"${path} is not a file")
   def notADir(path: Path): FileError    = new FileError(s"${path} is not a directory")
+
+object Implicits:
+
+  given showError: Show[OpenQuestError] = Show.fromToString[OpenQuestError]

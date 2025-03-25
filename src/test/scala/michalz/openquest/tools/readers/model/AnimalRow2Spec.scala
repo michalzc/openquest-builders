@@ -1,18 +1,29 @@
 package michalz.openquest.tools.readers.model
 
+import cats.Show
 import cats.data.NonEmptyList
 import cats.effect.IO
 import cats.effect.std.Random
+
 import cats.syntax.either.*
-import michalz.openquest.tools.converters.AnimalConverter.toAnimal
-import michalz.openquest.tools.cats.effect.specs2.CateEffect
-import michalz.openquest.tools.generators.IdGenerator
-import michalz.openquest.tools.readers.AnimalsReader
+
+import org.typelevel.log4cats.Logger
+import org.typelevel.log4cats.slf4j.Slf4jLogger
+
+import java.nio.file.Paths
+
 import org.specs2.Specification
 import org.specs2.matcher.Matchers
 
-
-import java.nio.file.Paths
+import michalz.openquest.tools.Implicits.*
+import michalz.openquest.tools.Implicits.showError
+import michalz.openquest.tools.OpenQuestError
+import michalz.openquest.tools.bestiary.model.Animal
+import michalz.openquest.tools.bestiary.model.Animal.showAnimal
+import michalz.openquest.tools.cats.effect.specs2.CateEffect
+import michalz.openquest.tools.converters.AnimalConverter.toAnimal
+import michalz.openquest.tools.generators.IdGenerator
+import michalz.openquest.tools.readers.AnimalsReader
 
 class AnimalRow2Spec extends Specification with Matchers with CateEffect:
   def is =
@@ -22,6 +33,8 @@ class AnimalRow2Spec extends Specification with Matchers with CateEffect:
         Failed row in file should be skipped $skipFailed
         Convert rows to Animals $rowsAnimals
       """
+
+  val logger: Logger[IO] = Slf4jLogger.getLogger[IO]
 
   private val properFile                = Paths.get(getClass.getResource("/animals.csv").toURI)
   private val invalidFile               = Paths.get(getClass.getResource("/animals-with-errors.csv").toURI)
@@ -50,7 +63,7 @@ class AnimalRow2Spec extends Specification with Matchers with CateEffect:
         .map { case (animalEth, id) =>
           animalEth.flatMap(_.toAnimal(id))
         }
-        .evalTap(IO.println)
+        .evalTap(elem => logger.info(elem.show))
         .compile
         .toList
 

@@ -5,12 +5,14 @@ import cats.instances.either.*
 import cats.syntax.either.*
 import cats.syntax.option.*
 import cats.syntax.parallel.*
+import michalz.openquest.tools.*
 import michalz.openquest.tools.bestiary.model.*
 import michalz.openquest.tools.parsers.dice.CharacteristicParser
 import michalz.openquest.tools.readers.model.AnimalRow
-import michalz.openquest.tools.*
 
 import scala.language.implicitConversions
+
+class AnimalConverter
 
 object AnimalConverter {
 
@@ -20,8 +22,7 @@ object AnimalConverter {
       case CharacteristicParser.Failure(error, remain) => NonEmptyList.one(ParsingError(error, remain.toString)).asLeft
       case CharacteristicParser.Error(error, remain)   => NonEmptyList.one(ParsingError(error, remain.toString)).asLeft
 
-  extension (row: AnimalRow)
-    def toAnimal(id: String): OpenQuestResultNel[Animal] = makeAnimal(id, row)
+  extension (row: AnimalRow) def toAnimal(id: String): OpenQuestResultNel[Animal] = makeAnimal(id, row)
 
   extension (input: String)
     def toCharacteristic: OpenQuestResultNel[Characteristic] = parseCharacteristic(input)

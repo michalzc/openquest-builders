@@ -1,12 +1,12 @@
 package michalz.openquest.tools.bestiary.model
 
 case class Skill(
-  id: String,
+  id: Option[String],
   name: String,
   img: String,
   description: String,
   formula: String,
   `type`: String,
   advancement: Int,
-  key: String
+  key: Option[String]
 ) extends Item

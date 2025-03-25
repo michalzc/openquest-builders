@@ -1,10 +1,10 @@
 package michalz.openquest.tools.bestiary.model
 
 case class Armour(
-  id: String,
+  id: Option[String],
   name: String,
   img: String,
   ap: Int,
   state: String,
-  key: String
+  key: Option[String]
 ) extends Item

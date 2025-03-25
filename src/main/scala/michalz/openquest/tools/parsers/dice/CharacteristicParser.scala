@@ -1,14 +1,10 @@
 package michalz.openquest.tools.parsers.dice
 
 import cats.syntax.either.*
+import cats.syntax.option.*
 import michalz.openquest.tools.bestiary.model.Characteristic
-import michalz.openquest.tools.parsers.dice.RollStringParser
 import michalz.openquest.tools.{OpenQuestError, ParsingError}
 import org.slf4j.{Logger, LoggerFactory}
-
-import cats.syntax.option.*
-
-import scala.util.parsing.combinator.JavaTokenParsers
 
 trait CharacteristicParser extends RollStringParser:
 

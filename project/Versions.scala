@@ -1,0 +1,16 @@
+object Versions {
+  val parserCombinators = "2.4.0"
+  val catsCore = "2.13.0"
+  val catsEffect = "3.5.7"
+  val fs2 = "3.11.0"
+  val fs2Csv = "1.11.2"
+  val catsLogging = "2.7.0"
+  val log2j = "2.24.3"
+  val circe = "0.14.10"
+  val circeYaml = "1.15.0"
+  val slugify = "3.0.7"
+  val osLib = "0.11.4"
+  val catsEffectScalaTest = "1.6.0"
+  val scalaTest = "3.2.19"
+  val specs2 = "5.5.8"
+}

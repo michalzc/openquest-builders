@@ -9,6 +9,7 @@ import fs2.io.file.{Files, Path}
 import fs2.text.utf8
 import michalz.openquest.tools.readers.model.AnimalRow
 import michalz.openquest.tools.{ErrorWrapper, OpenQuestError}
+import org.typelevel.log4cats.Logger
 
 import java.nio.file
 

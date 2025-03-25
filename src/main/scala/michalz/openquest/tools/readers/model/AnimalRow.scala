@@ -1,10 +1,10 @@
 package michalz.openquest.tools.readers.model
 
-import cats.data.NonEmptyList
-import fs2.data.csv.{CsvRowDecoder, RowDecoder}
+import fs2.data.csv.{CellDecoder, DecoderError, DecoderResult, RowDecoder}
 import fs2.data.csv.generic.semiauto.*
-import michalz.openquest.tools.{OpenQuestResult, OpenQuestResultNel}
-import michalz.openquest.tools.bestiary.model.Animal
+import cats.syntax.option.*
+import cats.syntax.either.*
+import michalz.openquest.tools.parsers.animal.AnimalArmourParser
 
 import scala.compiletime.{constValue, erasedValue, summonInline}
 
@@ -20,9 +20,21 @@ case class AnimalRow(
   hp: String,
   dm: String,
   move: String,
-  armour: String,
+  armour: AnimalArmour,
   combat: String
 )
 
+case class AnimalArmour(name: Option[String], value: Int)
+
+object AnimalArmour:
+  def apply(name: String, value: Int): AnimalArmour = AnimalArmour(name.some, value)
+  def apply(value: Int): AnimalArmour = AnimalArmour(name = none[String], value = value)
+  def noArmour: AnimalArmour = AnimalArmour(0)
+
+
 object AnimalRow:
+
+  implicit val animalArmourDecoder: CellDecoder[AnimalArmour] = new CellDecoder[AnimalArmour]:
+    override def apply(cell: String): DecoderResult[AnimalArmour] = AnimalArmourParser.parseArmour(cell).leftMap(ope => DecoderError(ope.getMessage))
+
   implicit val decoder: RowDecoder[AnimalRow] = deriveRowDecoder[AnimalRow]

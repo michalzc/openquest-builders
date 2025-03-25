@@ -1,10 +1,9 @@
 package michalz.openquest.tools.parsers.dice
 
-import cats.Id
-
-import scala.util.parsing.combinator.JavaTokenParsers
 import cats.syntax.option.*
 import org.slf4j.{Logger, LoggerFactory}
+
+import scala.util.parsing.combinator.JavaTokenParsers
 
 case class RollStats(
   min: Long,

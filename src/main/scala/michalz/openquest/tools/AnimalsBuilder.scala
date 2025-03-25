@@ -2,13 +2,16 @@ package michalz.openquest.tools
 
 import cats.data.{EitherT, NonEmptyList, Validated}
 import cats.effect.{ExitCode, IO, IOApp, Sync}
+
 import cats.syntax.either.*
 import cats.syntax.semigroup.*
-import michalz.openquest.tools.validation.{validateDirectory, validateFile}
+
 import org.typelevel.log4cats.Logger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 
 import java.nio.file.{Path, Paths}
+
+import michalz.openquest.tools.validation.{validateDirectory, validateFile}
 
 case class AppPaths(sourceFile: Path, destinationDirectory: Path)
 
@@ -42,14 +45,16 @@ def generateAnimals[F[_]: Sync](
   EitherT.pure[F, NonEmptyList[OpenQuestError]](()).value
 
 object AnimalsBuilder extends IOApp:
-  val logger: Logger[IO]                    = Slf4jLogger.getLogger
+  val logger: Logger[IO] = Slf4jLogger.getLogger
+
   def run(args: List[String]): IO[ExitCode] =
     val result = for {
+      _ <- EitherT.liftF(logger.info("Idzie"))
       paths <- EitherT(validateInput(args))
       _     <- EitherT(generateAnimals[IO](paths.sourceFile, paths.destinationDirectory))
     } yield ()
 
-    result.foldF(
+    logger.info("Application starting") >> result.foldF(
       _.traverse(error => logger.error(error)("Application Error")) >> IO.pure(ExitCode.Error),
       _ => IO.pure(ExitCode.Success)
     )

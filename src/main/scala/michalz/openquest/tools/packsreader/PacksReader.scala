@@ -5,8 +5,8 @@ import com.github.slugify.Slugify
 import io.circe.{Json, ParsingFailure}
 import io.circe.yaml.parser.parse
 import michalz.openquest.tools.packsreader.PacksReader.skillBySlugMatcher
-import os.Path
 
+import java.nio.file.Path
 import scala.jdk.CollectionConverters.*
 
 type ParsingResult = Either[ParsingFailure, Json]
