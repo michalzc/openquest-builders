@@ -7,7 +7,8 @@ case class Animal(
   name: String,
   characteristics: Characteristics,
   attributes: Attributes,
-  items: List[Item]
+  items: List[Item],
+  description: Option[String]
 )
 
 object Animal:

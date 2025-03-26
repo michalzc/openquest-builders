@@ -8,9 +8,8 @@ import io.circe.yaml.parser.parse
 import scala.annotation.unused
 import scala.jdk.CollectionConverters.*
 
-import com.github.slugify.Slugify
-
 import michalz.openquest.tools.packsreader.PacksReader.skillBySlugMatcher
+import michalz.openquest.tools.utils.Slugify
 
 type ParsingResult = Either[ParsingFailure, Json]
 
@@ -55,12 +54,6 @@ case class PacksReader(
 
 object PacksReader {
 
-  val slugify =
-    Slugify
-      .builder()
-      .customReplacements(Map("(" -> "", ")" -> "").asJava)
-      .build()
-
   def findSkill(skillSlug: String): State[PacksReader, Option[Json]] =
     State(pr => pr.findSkillAndCache(skillSlug))
 
@@ -72,6 +65,6 @@ object PacksReader {
       (for {
         `type` <- typeJson
         name   <- nameJson
-        skillSlug = slugify.slugify(name)
+        skillSlug = Slugify(name)
       } yield `type` == "skill" && skillSlug == skillSlug).getOrElse(false)
 }

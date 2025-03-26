@@ -1,9 +1,6 @@
 package michalz.openquest.tools.readers.model
 
 import cats.syntax.either.*
-import cats.syntax.option.*
-
-import scala.compiletime.{constValue, erasedValue, summonInline}
 
 import michalz.openquest.tools.bestiary.model.{Characteristic, ModBaseAttr, ModMaxValueAttr, StringModAttr}
 import michalz.openquest.tools.parsers.animal.AnimalArmourParser
@@ -23,17 +20,10 @@ case class AnimalRow(
   cha: Characteristic,
   hp: ModMaxValueAttr,
   dm: StringModAttr,
-  move: ModBaseAttr,
+  move: String,
   armour: AnimalArmour,
   combat: String
 )
-
-case class AnimalArmour(name: Option[String], value: Int)
-
-object AnimalArmour:
-  def apply(name: String, value: Int): AnimalArmour = AnimalArmour(name.some, value)
-  def apply(value: Int): AnimalArmour               = AnimalArmour(name = none[String], value = value)
-  def noArmour: AnimalArmour                        = AnimalArmour(0)
 
 object AnimalRow:
 
