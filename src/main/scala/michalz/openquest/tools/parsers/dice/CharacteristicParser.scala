@@ -1,11 +1,10 @@
 package michalz.openquest.tools.parsers.dice
 
+import cats.data.NonEmptyList
 import cats.syntax.either.*
 import cats.syntax.option.*
-
 import org.slf4j.{Logger, LoggerFactory}
-
-import michalz.openquest.tools.{OpenQuestError, ParsingError}
+import michalz.openquest.tools.{OpenQuestError, OpenQuestResultNel, ParsingError}
 import michalz.openquest.tools.bestiary.model.Characteristic
 
 trait CharacteristicParser extends RollStringParser:
@@ -39,4 +38,9 @@ trait CharacteristicParser extends RollStringParser:
       case Error(error, remains) =>
         ParsingError(error, remains.toString).asLeft
 
-object CharacteristicParser extends CharacteristicParser
+object CharacteristicParser extends CharacteristicParser:
+  given resultConversion[A]: Conversion[CharacteristicParser.ParseResult[A], OpenQuestResultNel[A]] with
+    def apply(result: CharacteristicParser.ParseResult[A]): OpenQuestResultNel[A] = result match
+      case CharacteristicParser.Success(result, _)     => result.asRight
+      case CharacteristicParser.Failure(error, remain) => NonEmptyList.one(ParsingError(error, remain.toString)).asLeft
+      case CharacteristicParser.Error(error, remain)   => NonEmptyList.one(ParsingError(error, remain.toString)).asLeft
